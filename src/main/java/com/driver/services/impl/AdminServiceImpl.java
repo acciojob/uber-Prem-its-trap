@@ -18,13 +18,10 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	AdminRepository adminRepository1;
-
 	@Autowired
 	DriverRepository driverRepository1;
-
 	@Autowired
 	CustomerRepository customerRepository1;
-
 	@Override
 	public void adminRegister(Admin admin) {
 		Admin admin1 = new Admin();
