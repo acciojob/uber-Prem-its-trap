@@ -44,40 +44,45 @@ public class CustomerServiceImpl implements CustomerService {
 		//Book the driver with lowest driverId who is free (cab available variable is Boolean.TRUE).
         // If no driver is available, throw "No cab available!" exception
 		//Avoid using SQL query
-		Customer customer = customerRepository2.findById(customerId).get();
-
-		List<Driver> driverList = new ArrayList<>();
-		driverList = driverRepository2.findAll();
+		TripBooking tripBooking = new TripBooking();
 		Driver driver = null;
-		for(Driver d : driverList){
-			if(d.getCab().getAvailable() == Boolean.TRUE) {
-				if ((driver == null) || d.getDriverId() < driver.getDriverId()) {
-					driver = d;
+
+		List<Driver> allDrivers = driverRepository2.findAll();
+
+		for(Driver driver1 : allDrivers){
+
+			if(driver1.getCab().getAvailable()==Boolean.TRUE){
+				if((driver ==null) || (driver1.getDriverId() < driver.getDriverId())){
+					driver = driver1;
 				}
 			}
 		}
-		if(driver == null){
+		if(driver==null){
 			throw new Exception("No cab available!");
 		}
-		//setting
-		TripBooking tripBooking = new TripBooking();
+
+		Customer customer = customerRepository2.findById(customerId).get();
+		tripBooking.setCustomer(customer);
+		tripBooking.setDriver(driver);
 		tripBooking.setFromLocation(fromLocation);
 		tripBooking.setToLocation(toLocation);
 		tripBooking.setDistanceInKm(distanceInKm);
+
+		int ratePerKm = driver.getCab().getPerKmRate();
+		tripBooking.setBill(distanceInKm*10);
 		tripBooking.setStatus(TripStatus.CONFIRMED);
+
 		driver.getCab().setAvailable(false);
-		tripBooking.setBill(driver.getCab().getPerKmRate() * distanceInKm);
 
-		// setting the customer in trip booking and driver
-		tripBooking.setCustomer(customer);
-		tripBooking.setDriver(driver); // setting the driver
 		customer.getTripBookingList().add(tripBooking);
-		driver.getTripBookingList().add(tripBooking);
-
-		driverRepository2.save(driver);
 		customerRepository2.save(customer);
 
+		driver.getTripBookingList().add(tripBooking);
+		driverRepository2.save(driver);
+
+
 		return tripBooking;
+
 
 	}
 
