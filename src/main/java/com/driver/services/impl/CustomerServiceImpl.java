@@ -45,13 +45,12 @@ public class CustomerServiceImpl implements CustomerService {
         // If no driver is available, throw "No cab available!" exception
 		//Avoid using SQL query
 		Customer customer = customerRepository2.findById(customerId).get();
-//		Driver dr = driverRepository2.findById(customerId).get();
 
 		List<Driver> driverList = new ArrayList<>();
 		driverList = driverRepository2.findAll();
 		Driver driver = null;
 		for(Driver d : driverList){
-			if(d.getCab().getAvailable() == true) {
+			if(d.getCab().getAvailable() == Boolean.TRUE) {
 				if (driver == null) {
 					driver = d;
 				} else if (driver != null && driver.getDriverId() >= d.getDriverId()) {
