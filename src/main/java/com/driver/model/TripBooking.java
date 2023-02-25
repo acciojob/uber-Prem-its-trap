@@ -6,10 +6,10 @@ import javax.persistence.*;
 public class TripBooking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int tripBookingTd;
+    private int tripBookingId;
     private String fromLocation;
     private String toLocation;
-    private int distanceKm;
+    private int distanceInKm;
     private TripStatus tripStatus;
     private int bill;
 
@@ -27,17 +27,15 @@ public class TripBooking {
     // this is child for driver
 
 
-
-
     public TripBooking() {
     }
 
-    public int getTripBookingTd() {
-        return tripBookingTd;
+    public int getTripBookingId() {
+        return tripBookingId;
     }
 
-    public void setTripBookingTd(int tripBookingTd) {
-        this.tripBookingTd = tripBookingTd;
+    public void setTripBookingId(int tripBookingId) {
+        this.tripBookingId = tripBookingId;
     }
 
     public String getFromLocation() {
@@ -56,12 +54,12 @@ public class TripBooking {
         this.toLocation = toLocation;
     }
 
-    public int getDistanceKm() {
-        return distanceKm;
+    public int getDistanceInKm() {
+        return distanceInKm;
     }
 
-    public void setDistanceKm(int distanceKm) {
-        this.distanceKm = distanceKm;
+    public void setDistanceInKm(int distanceInKm) {
+        this.distanceInKm = distanceInKm;
     }
 
     public TripStatus getTripStatus() {
@@ -96,3 +94,4 @@ public class TripBooking {
         this.driver = driver;
     }
 }
+
