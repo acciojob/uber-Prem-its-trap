@@ -4,7 +4,6 @@ import javax.annotation.Generated;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Admin")
 public class Admin {
 //    int admin username password
     @Id

@@ -3,7 +3,6 @@ package com.driver.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TripBooking")
 public class TripBooking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +19,6 @@ public class TripBooking {
     private Customer customer;
 
     // this is for driver, one driver can do multiple trips
-
     @ManyToOne
     @JoinColumn
     private Driver driver;
